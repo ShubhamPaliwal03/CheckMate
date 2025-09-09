@@ -22,6 +22,12 @@ body {
   max-width: 600px;
 }
 
+#logo{
+  height: 60px;
+  margin-left: 15px;
+  margin-top: 25px;
+}
+
 /* Header */
 header {
   text-align: center;
