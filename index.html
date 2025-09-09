@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CheckMate - Response Sheet Parser</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CheckMate ✅</h1>
+      <p class="subtitle">Response Sheet Parser</p>
+      <p class="subtitle2">( for exams conducted on TCS iON ©️)</p>
+    </header>
+
+    <main class="flip-container">
+
+      <!-- Front Face: Input Form -->
+      <section class="card front">
+        <form id="form" class="form-card">
+
+          <label for="url">Enter URL:</label>
+          <input 
+            type="text" 
+            id="url" 
+            placeholder="Paste your response sheet URL here e.g. https://cdn.digialm.com//per/g01/pub/4821/touchstone/AssessmentQPHTMLMode1/4821O91837/4821O91837S2D31/98765432109876543/2222150408123_4821O91837S2D31E2.html#"
+            pattern="^https:\/\/cdn\.digialm\.com\/+per\/g01\/pub\/\d+\/touchstone\/AssessmentQPHTMLMode1\/\d+O\d+\/\d+O\d+S\d+D\d+\/\d+\/\d+_\d+O\d+S\d+D\d+E\d+\.html#?$"
+            required
+          />
+
+          <fieldset id="markingScheme">
+              <legend>Select Marking Scheme</legend>
+
+              <label for="marksForCorrectAns" style="color: #666;">Marks for Correct Answer:</label>
+              <input type="number" id="marksForCorrectAns" value="1" min="0" step="0.25" required>
+
+              <label for="marksForWrongAns" style="color: #666;">Marks for Wrong Answer:</label>
+              <input type="number" id="marksForWrongAns" value="0" max="0" step="0.25" required>
+          </fieldset>
+
+          <button type="submit" id="check_score_btn">Check Score</button>
+        </form>
+
+        <!-- Loader -->
+        <div id="loader" class="loader" style="display: none;"></div>
+        <section id="errorContainer" class="result-card error" style="display:none;">
+          <span id="error">Error fetching results.</span>
+        </section>
+      </section>
+
+      <!-- Back Face: Results -->
+      <section class="card back">
+        <section class="result-card success">
+          <h2 class="big-score">Score: <span id="score">0 / 0</span></h2>
+          <div class="result-grid">
+            <div class="result-item">
+              <span class="label">Percentage</span>
+              <span class="value" id="percentage">0%</span>
+            </div>
+            <div class="result-item">
+              <span class="label">Correct Answers</span>
+              <span class="value" id="correctCount">0</span>
+            </div>
+            <div class="result-item">
+              <span class="label">Wrong Answers</span>
+              <span class="value" id="wrongCount">0</span>
+            </div>
+            <div class="result-item">
+              <span class="label">Not Answered</span>
+              <span class="value" id="notAnswered">0</span>
+            </div>
+            <div class="result-item">
+              <span class="label">Answered Questions</span>
+              <span class="value" id="answeredQuestions">0</span>
+            </div>
+            <div class="result-item">
+              <span class="label">Total Questions</span>
+              <span class="value" id="totalQuestions">0</span>
+            </div>
+          </div>
+          <button id="checkAnotherBtn">Check Another Result</button>
+        </section>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

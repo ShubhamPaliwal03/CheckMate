@@ -1,0 +1,223 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General Layout */
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: #f7f9fc;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  margin-top: 3rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.3rem;
+}
+
+.subtitle2 {
+  color: #999;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* Flip Container */
+.flip-container {
+  perspective: 1500px;
+  position: relative;
+  height: auto;
+}
+
+.card {
+  width: 100%;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.front { transform: rotateY(0deg); }
+.back { transform: rotateY(180deg); }
+
+/* When flipped */
+.flip-container.flipped .front { transform: rotateY(-180deg); }
+.flip-container.flipped .back { transform: rotateY(0deg); }
+
+/* Form Card */
+.form-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-card label {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.form-card input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.form-card input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.form-card button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #3498db;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-card button:hover {
+  background: #2980b9;
+}
+
+/* Loader */
+.loader {
+  margin: 20px auto;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Result Card */
+.result-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.result-card.success {
+  border-top: 5px solid #4CAF50;
+}
+
+.result-card.error {
+  border-top: 5px solid #e74c3c;
+  color: #e74c3c;
+  margin-top: 2rem;
+}
+
+/* Big Score Display */
+.big-score {
+  font-size: 3rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Grid for detailed results */
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.result-item {
+  background: #f1f5f9;
+  padding: 12px 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.result-item .label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.result-item .value {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+button#checkAnotherBtn {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #3498db;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button#checkAnotherBtn:hover {
+  background: #2980b9;
+}
+
+/* Fieldset */
+fieldset {
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 8px;
+}
+
+fieldset legend { font-weight: bold; }
+
+#markingScheme label { display: block; margin: 8px 0 4px; }
+#markingScheme input { width: 100%; padding: 6px; border-radius: 5px; border: 1px solid #ccc; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.6rem; }
+  .big-score { font-size: 2.2rem; }
+  .result-grid { grid-template-columns: 1fr; }
+  .result-item .value { font-size: 1.1rem; }
+}
