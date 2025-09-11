@@ -1,6 +1,6 @@
 export default {
 
-  async fetch(request, env, ctx) {
+  async fetch(request) {
 
     try {
 
@@ -15,11 +15,14 @@ export default {
         return new Response("Bad Request: target query param missing", { status: 400 });
       }
 
+      // Decode in case the URL is encoded
+      const decodedTarget = decodeURIComponent(target);
+
       let upstream;
       
       try {
 
-        upstream = await fetch(target, {
+        upstream = await fetch(decodedTarget, {
 
             method: "GET",
             redirect: "follow", // follow redirects automatically
@@ -27,7 +30,7 @@ export default {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "Accept-Language": "en-US,en;q=0.9",
-            "Referer": target.split("/").slice(0,3).join("/") // send base URL as referer
+            "Referer": decodedTarget.split("/").slice(0,3).join("/") // send base URL as referer
             },
             cf: {
             cacheEverything: true // optional, speeds up repeated requests
