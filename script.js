@@ -1,4 +1,4 @@
-const proxyURL = 'https://cors-anywhere.herokuapp.com/';
+const proxyURL = 'https://checkmate_proxy_worker.shubhampaliwal-dev.workers.dev/?target=';
 
 // Form & Inputs
 const form = document.getElementById('form');
@@ -29,6 +29,7 @@ const totalQuestionsEl = document.getElementById('totalQuestions');
 
 // Form submission
 form.addEventListener('submit', (e) => {
+    
     if (!form.checkValidity()) return;
     e.preventDefault();
     checkScore();
@@ -36,12 +37,17 @@ form.addEventListener('submit', (e) => {
 
 // Fetch data with error handling
 const fetchData = async (URL) => {
+
     let err = 'none';
+
     try {
+
         const response = await fetch(URL);
 
         if (!response.ok) {
+
             switch (response.status) {
+
                 case 400: err = 'Bad Request - Check the URL and try again.'; break;
                 case 401: err = 'Unauthorized - You do not have permission to access this resource.'; break;
                 case 403: err = 'Forbidden - You do not have permission to access this resource.'; break;
@@ -56,11 +62,15 @@ const fetchData = async (URL) => {
                 case 504: err = 'Gateway Timeout - Please try again later.'; break;
                 default: err = `Unexpected Error: ${response.status} - ${response.statusText}`; break;
             }
+
             return { response: null, err };
         }
 
         return { response, err };
+
     } catch (error) {
+
+        console.log(error);
         err = 'Network Error - Please check your internet connection.';
         return { response: null, err };
     }
@@ -68,6 +78,7 @@ const fetchData = async (URL) => {
 
 // Check score
 const checkScore = async () => {
+
     const targetURL = URLInput.value;
     const marksForCorrectAnswer = parseFloat(marksForCorrectAnswerInput.value);
     const marksForWrongAnswer = parseFloat(marksForWrongAnswerInput.value);
@@ -80,14 +91,18 @@ const checkScore = async () => {
     errorContainer.style.display = 'none';
     errorEl.innerText = '';
 
-    const { response, err } = await fetchData(proxyURL + targetURL);
+    const { response, err } = await fetchData(proxyURL + encodeURIComponent(targetURL));
 
     if (err !== 'none') {
+
         errorContainer.style.display = 'block';
         errorEl.innerText = err;
         console.log(err);
+
     } else {
+
         try {
+
             const html = await response.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
@@ -100,12 +115,19 @@ const checkScore = async () => {
             let notAnswered = 0;
 
             for (let i in answers) {
+
                 const selected = selectedAnswers[i].trim();
+
                 if (selected === '--' || selected === '') {
+
                     notAnswered++;
+
                 } else if (answers[i][0] === selected) {
+
                     correctAnswers++;
+
                 } else {
+
                     wrongAnswers++;
                 }
             }
@@ -132,6 +154,7 @@ const checkScore = async () => {
             flipContainer.classList.add('flipped');
 
         } catch (error) {
+
             errorContainer.style.display = 'block';
             errorEl.innerText = 'Error parsing data. Please check the URL.';
             console.log(error);
@@ -147,6 +170,7 @@ const checkScore = async () => {
 
 // Check another result (flip back)
 checkAnotherBtn.addEventListener('click', () => {
+
     flipContainer.classList.remove('flipped');
     URLInput.value = '';
 });
