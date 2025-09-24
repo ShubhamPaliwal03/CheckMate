@@ -108,7 +108,16 @@ const checkScore = async () => {
             const doc = parser.parseFromString(html, 'text/html');
 
             const answers = [...doc.querySelectorAll('.rightAns')].map(el => el.innerText);
-            const selectedAnswers = [...doc.querySelectorAll('.questionPnlTbl .rw > table:nth-child(2) tr:last-child > td:last-child')].map(el => el.innerText);
+            let selectedAnswers;
+            
+            if (targetURL.includes('cdn3')) {
+
+                selectedAnswers = [...doc.querySelectorAll('.questionPnlTbl .rw > table:nth-child(2) tr:nth-child(4) > td:last-child')].map(el => el.innerText);
+
+            } else {
+
+                selectedAnswers = [...doc.querySelectorAll('.questionPnlTbl .rw > table:nth-child(2) tr:last-child > td:last-child')].map(el => el.innerText);
+            }
 
             let correctAnswers = 0;
             let wrongAnswers = 0;
@@ -117,6 +126,8 @@ const checkScore = async () => {
             for (let i in answers) {
 
                 const selected = selectedAnswers[i].trim();
+
+                console.log(selected, answers[i][0]);
 
                 if (selected === '--' || selected === '') {
 
