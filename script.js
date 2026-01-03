@@ -110,14 +110,14 @@ const checkScore = async () => {
             const answers = [...doc.querySelectorAll('.rightAns')].map(el => el.innerText);
             let selectedAnswers;
             
-            if (targetURL.includes('cdn3')) {
+            // if (targetURL.includes('cdn3')) {
 
-                selectedAnswers = [...doc.querySelectorAll('.questionPnlTbl .rw > table:nth-child(2) tr:nth-child(4) > td:last-child')].map(el => el.innerText);
+            //     selectedAnswers = [...doc.querySelectorAll('.questionPnlTbl .rw > table:nth-child(2) tr:nth-child(4) > td:last-child')].map(el => el.innerText);
 
-            } else {
+            // } else {
 
                 selectedAnswers = [...doc.querySelectorAll('.questionPnlTbl .rw > table:nth-child(2) tr:last-child > td:last-child')].map(el => el.innerText);
-            }
+            // }
 
             let correctAnswers = 0;
             let wrongAnswers = 0;
