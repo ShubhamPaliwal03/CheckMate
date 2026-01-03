@@ -1,5 +1,7 @@
 # ✅ CheckMate
 
+<img src="https://github.com/ShubhamPaliwal03/CheckMate/blob/main/resources/logo.png" style="height: 150px; width: 150px;">
+
 **CheckMate** is a web app that helps candidates evaluate their **TCS iON response sheets** instantly.  
 Paste your response sheet URL, select the marking scheme, and get a detailed scorecard within seconds.
 
